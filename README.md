@@ -64,3 +64,81 @@ Como criaremos um novo e-mail vamos usar:
 ```python
 email = outlook.CreateItem(0)
 ```
+---
+#### Bloco extra
+Caso você possua mais de um endereço de e-mail logado no seu Microsoft Outlook e deseje especificar o e-mail a ser usado como remetente, o seguinte código pode te ajudar:
+
+```    
+profile = None
+    namespace = outlook.GetNamespace("MAPI")
+    for acc in namespace.Accounts:
+        if acc.SmtpAddress == "email_especificado@exemplo.com":
+            profile = acc
+            break
+
+    if profile is not None: 
+        email._oleobj_.Invoke(*(64209, 0, 8, 0, profile)) # Configurar o perfil do remetente
+    else: 
+        print("Perfil não encontrado")
+```
+
+
+Este código itera sobre todas as contas disponíveis e se uma dessas contas for igual a conta especificada, o método Invoke seleciona como remetente. Caso não haja nenhuma conta igual a especificada ocorre o erro "Perfil não encontrado".
+
+---
+
+#### Estrutura do e-mail
+Agora vamos explorar os elementos da estrutura do e-mail.
+
+Destinatários:
+```
+email.To("destino_1@exemplo.com")
+
+# Ou
+
+lista_destinatarios = ["destino_1@exemplo.com", "destino_2@exemplo.com", "destino_3@exemplo.com"]
+email.To = ';'.join(destinatarios)
+```
+Destinatários em cópia:
+```
+email.CC("copia_1@exemplo.com")
+
+# Ou
+
+lista_copias = ["copia_1@exemplo.com", "copia_2@exemplo.com", "copia_3@exemplo.com"]
+email.To = ';'.join(lista_copias)
+```
+
+#### Título e corpo do e-mail:
+Vamos criar um e-mail de exemplo para o envio de um relatório:
+
+```
+# Título
+email.Subject = "Relatório Semanal de Vendas"
+
+# Corpo
+email.Body = "Boa tarde! Segue em anexo o relatório semanal de vendas da equipe 1.
+\nQualquer dúvida estou à disposição."
+
+```
+#### Imagens incorporadas no e-mail
+Para incorporar uma imagem usamos o bloco de código abaixo:
+```
+print_attachment = email.Attachments.Add(r"C:\Users\Usuario\Desktop\print_grafico.png")
+print_attachment.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", "imagem")
+
+email.HTMLBody = email.HTMLBody + f'<img src="cid:imagem">'
+```
+Primeiro adicionamos a imagem como anexo e acessamos a propriedade através do link "http://schemas.microsoft.com/mapi/proptag/0x3712001E" que nós permite inserir a imagem o corpo do e-mail. E por fim, concatena o corpo do e-mail com a imagem selecionada.
+
+#### Anexos
+Para adicionar um anexo é bem simples, baste usar novamente o método Attachments.Add:
+```
+planilha_attachment = email.Attachments.Add(r"C:\Users\Usuario\Desktop\relatorio.xlsx")
+```
+
+#### Finalização
+E finalmente, basta enviar o e-mail:
+```
+email.Send()
+```
