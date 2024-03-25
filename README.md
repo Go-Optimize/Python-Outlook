@@ -1,7 +1,3 @@
-
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
-
-
 # Integração Python + Outlook para envio de e-mails
 
 Este repositório oferece uma solução simples para integração entre Python e o Microsoft Outlook, permitindo o envio automatizado de e-mails diretamente de scripts Python. Com essa integração, os usuários podem incorporar facilmente funcionalidades de envio de e-mails em seus aplicativos Python, automatizando processos de comunicação por e-mail.
@@ -9,7 +5,7 @@ Este repositório oferece uma solução simples para integração entre Python e
 
 ## Introdução
 Primeiro precisamos entender a estrutura de um e-mail e os parâmetros que podem ser adicionados:
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](assets/exemplo_email.jpg)
 
 Seguindo a estrutura, os atributos que você deve especificar são:
 - Remetente (por padrão o e-mail principal é utilizado, mas em caso de múltiplos e-mails logados no Outlook é possível especificar qual você gostaria de utilizar)
@@ -124,7 +120,7 @@ email.Body = "Boa tarde! Segue em anexo o relatório semanal de vendas da equipe
 #### Imagens incorporadas no e-mail
 Para incorporar uma imagem usamos o bloco de código abaixo:
 ```
-print_attachment = email.Attachments.Add(r"C:\Users\Usuario\Desktop\print_grafico.png")
+print_attachment = email.Attachments.Add("assets/grafico.jpg")
 print_attachment.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", "imagem")
 
 email.HTMLBody = email.HTMLBody + f'<img src="cid:imagem">'
@@ -134,7 +130,7 @@ Primeiro adicionamos a imagem como anexo e acessamos a propriedade através do l
 #### Anexos
 Para adicionar um anexo é bem simples, baste usar novamente o método Attachments.Add:
 ```
-planilha_attachment = email.Attachments.Add(r"C:\Users\Usuario\Desktop\relatorio.xlsx")
+planilha_attachment = email.Attachments.Add("\relatorio.xlsx")
 ```
 
 #### Finalização
