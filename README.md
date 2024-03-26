@@ -164,7 +164,6 @@ if profile is not None:
 else: 
     print("Perfil não encontrado")
 
-
 # Configurar os campos do e-mail
 lista_destinatarios = ["destino_1@exemplo.com", "destino_2@exemplo.com", "destino_3@exemplo.com"]
 email.To = ';'.join(lista_destinatarios)
@@ -177,11 +176,11 @@ email.Subject = "Relatório Semanal de Vendas"
 email.Body = "Boa tarde! Segue em anexo o relatório semanal de vendas da equipe 1.\nQualquer dúvida estou à disposição."
 
 # Anexar imagem
-print_attachment = email.Attachments.Add(r"C:\Users\Usuario\Desktop\print_grafico.png")
-print_attachment.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", "imagem")
+screenshot_attachment = email.Attachments.Add(r"C:\Users\Usuario\Desktop\print_grafico.png")
+screenshot_attachment.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", "imagem")
 
 # Configurar a imagem como incorporada
-email.HTMLBody = email.HTMLBody + f'<img src="cid:imagem">'
+email.HTMLBody += '<img src="cid:imagem">'
 
 # Anexar arquivo de planilha
 planilha_attachment = email.Attachments.Add(r"C:\Users\Usuario\Desktop\relatorio.xlsx")
