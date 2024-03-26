@@ -21,11 +21,11 @@ Seguindo a estrutura, os atributos que você deve especificar são:
 
 O módulo que usaremos para a integração entre as duas ferramentas é o [win32com](https://pypi.org/project/pywin32/), ele fornece uma forma de interagir com uma tecnologia da Microsoft (COM - Component Object Model) que permite a comunicação entre diferentes programas e componentes do ambiente Windows. 
 
-Com o módulo win32com é possível acessar recursos como o Microsoft Office, Outlook, IExplorer e diversos aplicativos Windows, Sendo frequentemente usado para automatização de tarefas repetitivas.
+Com o módulo win32com é possível acessar recursos como o Microsoft Office, Outlook, IExplorer e diversos aplicativos Windows, sendo frequentemente usado para automatização de tarefas repetitivas.
 
 ## Instalação
 
-Para utlizar o módulo win32com é necessário instalar a biblioteca que ele está inserido, neste caso a biblioteca pywin32.
+Para utilizar o módulo win32com é necessário instalar a biblioteca que ele está inserido, neste caso a biblioteca pywin32.
 
 Para instalar uma biblioteca basta acessar o "Prompt de Comando" e colar o código abaixo:
 
@@ -125,7 +125,7 @@ print_attachment.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi
 
 email.HTMLBody = email.HTMLBody + f'<img src="cid:imagem">'
 ```
-Primeiro adicionamos a imagem como anexo e acessamos a propriedade através do link "http://schemas.microsoft.com/mapi/proptag/0x3712001E" que nós permite inserir a imagem o corpo do e-mail. E por fim, concatena o corpo do e-mail com a imagem selecionada.
+Primeiro adicionamos a imagem como anexo e acessamos a propriedade através do link "http://schemas.microsoft.com/mapi/proptag/0x3712001E" que nos permite inserir a imagem o corpo do e-mail. E por fim, concatena o corpo do e-mail com a imagem selecionada.
 
 #### Anexos
 Para adicionar um anexo é bem simples, baste usar novamente o método Attachments.Add:
@@ -189,3 +189,10 @@ planilha_attachment = email.Attachments.Add(r"C:\Users\Usuario\Desktop\relatorio
 # Enviar o e-mail
 email.Send()
 ```
+
+## Uso/Exemplos
+Para usar este repositório basta fazer o download da pasta "dist_low_code" ou adaptar o código mostrado acima para suas necessidades.
+No caso Low Code:
+- Faça o download da pasta 
+- Extraia para o diretório de sua preferência e edite os campos do arquivo "envio_email.py" 
+- Agora basta rodar o arquivo "envio_email.py"
