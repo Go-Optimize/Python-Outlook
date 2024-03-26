@@ -64,7 +64,7 @@ email = outlook.CreateItem(0)
 #### Bloco extra
 Caso você possua mais de um endereço de e-mail logado no seu Microsoft Outlook e deseje especificar o e-mail a ser usado como remetente, o seguinte código pode te ajudar:
 
-```    
+```python   
 profile = None
     namespace = outlook.GetNamespace("MAPI")
     for acc in namespace.Accounts:
@@ -87,7 +87,7 @@ Este código itera sobre todas as contas disponíveis e se uma dessas contas for
 Agora vamos explorar os elementos da estrutura do e-mail.
 
 Destinatários:
-```
+```python
 email.To("destino_1@exemplo.com")
 
 # Ou
@@ -96,7 +96,7 @@ lista_destinatarios = ["destino_1@exemplo.com", "destino_2@exemplo.com", "destin
 email.To = ';'.join(destinatarios)
 ```
 Destinatários em cópia:
-```
+```python
 email.CC("copia_1@exemplo.com")
 
 # Ou
@@ -108,7 +108,7 @@ email.To = ';'.join(lista_copias)
 #### Título e corpo do e-mail:
 Vamos criar um e-mail de exemplo para o envio de um relatório:
 
-```
+```python
 # Título
 email.Subject = "Relatório Semanal de Vendas"
 
@@ -119,7 +119,7 @@ email.Body = "Boa tarde! Segue em anexo o relatório semanal de vendas da equipe
 ```
 #### Imagens incorporadas no e-mail
 Para incorporar uma imagem usamos o bloco de código abaixo:
-```
+```python
 print_attachment = email.Attachments.Add("assets/grafico.jpg")
 print_attachment.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", "imagem")
 
@@ -129,20 +129,20 @@ Primeiro adicionamos a imagem como anexo e acessamos a propriedade através do l
 
 #### Anexos
 Para adicionar um anexo é bem simples, baste usar novamente o método Attachments.Add:
-```
+```python
 planilha_attachment = email.Attachments.Add("\relatorio.xlsx")
 ```
 
 #### Finalização
 E finalmente, basta enviar o e-mail:
-```
+```python
 email.Send()
 ```
 
 
 ## Código completo
 
-```
+```python
 import win32com.client
 
 # Criar uma instância do Outlook
